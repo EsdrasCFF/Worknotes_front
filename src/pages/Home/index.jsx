@@ -29,14 +29,15 @@ export function Home() {
       </Search>
 
       <Content>
-        <Section title="Minhas Notas">
+        <Section title="Minhas notas">
           <Note data={{
-            title: 'React',
-            tags: [
-              {id: '1', name:'react'},
-              {id: '2', name:'vite'}
-            ]
-          }} />
+                  title: 'React', 
+                  tags: [
+                    {id: '1', name: 'React'},
+                    {id: '2', name: 'Vite'},
+                  ]
+                }}
+          />
         </Section>
       </Content>
       
