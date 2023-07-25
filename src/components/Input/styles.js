@@ -18,6 +18,8 @@ export const Container = styled.div`
     padding: 12px;
     background: transparent;
     border: 0;
+
+    color: ${({ theme }) => theme.COLORS.GRAY_100};
     
 
     &:placeholder {
