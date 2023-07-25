@@ -11,7 +11,6 @@ export const Container =  styled.div`
 
   margin-bottom: 8px;
   border-radius: 10px;
-  border-right: 16px;
 
   > button {
     border: none;
