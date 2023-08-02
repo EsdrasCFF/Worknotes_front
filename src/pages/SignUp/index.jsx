@@ -5,7 +5,7 @@ import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 
 
-export function SingUp() {
+export function SignUp() {
   return (
     <Container>
 
