@@ -1,8 +1,8 @@
 import { Container } from './styles';
 
-export function ButtonText ({ title, isactive = false, ...rest }) {
+export function ButtonText ({ title, isActive = false, ...rest }) {
   return (
-    <Container type="button" {...rest} isactive={ isactive }>
+    <Container type="button" {...rest} isActive={ isActive }>
       {title}
     </Container>
   );
