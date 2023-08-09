@@ -10,10 +10,11 @@ import { Button } from "../../components/Button";
 import { Background, Container, Form } from "./styles";
 
 export function SignIn() {
-  const [email, setEmail ] = useState("");
-  const [password, setPassword ] = useState("");
 
-  const { signIn } = useAuth();
+  const [ email, setEmail ] = useState("");
+  const [ password, setPassword ] = useState("");
+
+  const  { signIn }  = useAuth();
 
   function handleSignIn() {
     signIn({email, password})
@@ -42,7 +43,7 @@ export function SignIn() {
             onChange={e => setPassword(e.target.value)}
         />
 
-        <Button title="Entrar" onClick={ handleSignIn }/>
+        <Button title="Entrar" onClick={ handleSignIn } />
 
         <Link to="/register"> Criar Conta </Link>
 
