@@ -1,5 +1,6 @@
 import { FiPlus, FiSearch } from 'react-icons/fi'
 import { Container, Brand, Menu, Search, Content, NewNote } from './styles';
+import { Link } from 'react-router-dom';
 
 import { Header } from '../../components/Header';
 import { ButtonText } from '../../components/ButtonText';
@@ -43,7 +44,7 @@ export function Home() {
       
       <NewNote>
         <FiPlus/>
-        Criar Nota
+        <Link to="/new" > Criar Nota </Link>
       </NewNote>
 
     </Container>
