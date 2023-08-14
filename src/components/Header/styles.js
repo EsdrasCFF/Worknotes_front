@@ -1,11 +1,5 @@
-<<<<<<< HEAD
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
-=======
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
->>>>>>> 769157ddd750961e9e0bb597dffdbcb4c46aec44
 
 export const Container = styled.header`
   grid-area: header;
