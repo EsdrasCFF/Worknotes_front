@@ -1,11 +1,12 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
+
+
 
 const AuthContext = createContext({});
 
 function AuthProvider({children}) {
-
   const [data, setData] = useState({});
   
   async function signIn({email, password}){    
@@ -17,7 +18,7 @@ function AuthProvider({children}) {
     localStorage.setItem("@worknotes:token", token);
   
 
-    api.defaults.headers.common["authorization"] = `Bearer ${token}`;
+    api.defaults.headers.authorization = `Bearer ${token}`;
     setData({user, token})
       
     } catch(error) {
@@ -32,13 +33,22 @@ function AuthProvider({children}) {
   function signOut() {
     localStorage.removeItem("@worknotes:user");
     localStorage.removeItem("@worknotes:token");
-    
-    setData({});
+
+    setData([]);
   }
 
-  async function updateProfile({ user }) {
-    try{
+  async function updateProfile({ user, avatarFile }) {
+    try {
+      if(avatarFile) {
+        const fileUploadForm = new FormData();
+        fileUploadForm.append("avatar", avatarFile);
+
+        const response = await api.patch("/users/avatar", fileUploadForm);
+        user.avatar = response.data.avatar;
+      }
+
       await api.put("/users", user);
+
       localStorage.setItem("@worknotes:user", JSON.stringify(user));
 
       setData({
@@ -46,13 +56,13 @@ function AuthProvider({children}) {
         token: data.token
       })
 
-      alert("Success updated user")
-      
-    } catch(error) {
+      alert("Updated profile!")
+
+    } catch (error) {
       if(error.reponse) {
-        alert(error.reponse.data.message)
+        alert(error.response.data.message);
       } else {
-        alert("Can't possible update user!")
+        alert("Unable to update profile!")
       }
     }
   }
@@ -62,8 +72,6 @@ function AuthProvider({children}) {
     const token = localStorage.getItem("@worknotes:token");
 
     if(token && user) {
-      api.defaults.headers.common["authorization"] = `Bearer ${token}`;
-      
       setData({
         token, 
         user: JSON.parse(user)

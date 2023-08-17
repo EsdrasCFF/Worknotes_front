@@ -3,19 +3,21 @@ import { RiShutDownLine } from 'react-icons/ri';
 
 import { useAuth } from '../../hooks/auth';
 
+import placeholderImage from '../../assets/placeholderImage.jpg';
+import { api } from '../../services/api';
 
 
 export function Header() {
-  const { signOut } = useAuth();
-
+  const { signOut, user } = useAuth();
+  const avatarURL = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : placeholderImage;
   return (
     <Container>
       <Profile to="/profile" >
-        <img src="https://github.com/EsdrasCFF.png" alt="Foto do usuário" />
+        <img src={avatarURL} alt="Foto do usuário" />
 
         <div>
           <span>Bem-vindo</span>
-          <strong>Esdras Castro</strong>
+          <strong>{user.name}</strong>
         </div>
       </Profile>
 
