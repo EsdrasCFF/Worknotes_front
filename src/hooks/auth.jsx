@@ -5,6 +5,7 @@ import { api } from '../services/api';
 const AuthContext = createContext({});
 
 function AuthProvider({children}) {
+
   const [data, setData] = useState({});
 
   async function signIn({ email, password }) {
@@ -44,12 +45,9 @@ function AuthProvider({children}) {
         const response = await api.patch("/users/avatar", fileUploadForm);
         user.avatar = response.data.avatar
       }
+      
       await api.put("/users", user);
       
-      user = {
-        name: user.name,
-        email: user.email
-      }
 
       localStorage.setItem("@worknotes:user", JSON.stringify(user));
 
@@ -59,6 +57,7 @@ function AuthProvider({children}) {
       });
 
       alert("Profile updated!")
+
 
     } catch(error) {
       if(error.response) {
@@ -74,6 +73,8 @@ function AuthProvider({children}) {
     const token = localStorage.getItem("@worknotes:token");
 
     if(token && user) {
+      api.defaults.headers.common["authorization"] = `Bearer ${token}`;
+
       setData({
         user: JSON.parse(user),
         token

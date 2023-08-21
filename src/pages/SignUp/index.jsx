@@ -16,7 +16,7 @@ export function SignUp() {
   const [email, setEmail ] = useState("");
   const [password, setPassword ] = useState("");
 
-  const redirect = useNavigate();
+  const navigate = useNavigate();
 
   async function handleSignUp() {
     if(!name || !email || !password) {
@@ -26,7 +26,7 @@ export function SignUp() {
     api.post("/users", {name, email, password})
       .then(() => {
         alert("Successfully registered user!")
-        redirect("/")
+        navigate("/")
       })
       .catch( error => {
         if(error.response) {
