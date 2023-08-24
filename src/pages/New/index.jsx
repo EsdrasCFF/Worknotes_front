@@ -8,63 +8,71 @@ import { TextArea } from '../../components/TextArea';
 import { NoteItem } from '../../components/NoteItem';
 import { Section } from '../../components/Section';
 import { Button } from '../../components/Button';
+import { ButtonText } from '../../components/ButtonText';
 
 import { api } from '../../services/api';
 
 export function New() {
- const [links, setLinks] = useState([]);
- const [newLink, setNewLink] = useState("");
+  const [links, setLinks] = useState([]);
+  const [newLink, setNewLink] = useState("");
 
- const [tags, setTags] = useState([]);
- const [newTag, setNewTag] = useState("");
+  const [tags, setTags] = useState([]);
+  const [newTag, setNewTag] = useState("");
 
- const [title, setTitle] = useState("");
- const [description, setDescription] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
- const redirect = useNavigate();
+  const navigate = useNavigate();
 
- function handleAddLink() {
+  function handleAddLink() {
   setLinks(prevState => [...prevState, newLink]);
   setNewLink("")
- }
+  }
 
- function handleRemoveLink(deleted) {
+  function handleRemoveLink(deleted) {
   setLinks(prevState => prevState.filter( link => link !== deleted ))
- }
+  }
 
- function handleAddTag() {
+  function handleAddTag() {
   setTags(prevState => [...prevState, newTag]);
   setNewTag("")
- }
+  }
 
- function handleRemoveTag(deleted) {
+  function handleRemoveTag(deleted) {
   setTags(prevState => prevState.filter( tag => tag !== deleted))
- }
-
-async function handleNewNote() {
-  if(!title) {
-    return alert("Digite uma título para esta nota!")
   }
 
-  if(newLink) {
-    return alert("Você deixou um link no campo. Clique em adicionar ou deixe em branco!")
+  async function handleNewNote() {
+    if(!title) {
+      return alert("Title is required to register note!")
+    }
+
+    if(!description) {
+      return alert("Description is required to register note!")
+    }
+
+    if(newLink) {
+      return alert("Você deixou um link no campo. Clique em adicionar ou deixe em branco!")
+    }
+
+    if(newTag) {
+      return alert("Você deixou uma tag no campo. Clique em adicionar ou deixe em branco!")
+    }
+
+    await api.post("/notes", {
+      title,
+      description,
+      tags,
+      links
+    });
+
+    alert("Created note with successfuly!")
+    navigate(-1)
   }
 
-  if(newTag) {
-    return alert("Você deixou uma tag no campo. Clique em adicionar ou deixe em branco!")
+  function handleBack() {
+    navigate(-1)
   }
-
-  await api.post("/notes", {
-    title,
-    description,
-    tags,
-    links
-  });
-
-  alert("Created note with successfuly!")
-  redirect("/")
-}
- 
 
   return (
     <Container>
@@ -74,7 +82,7 @@ async function handleNewNote() {
         <Form>
           <header>
             <h1>Criar nota</h1>
-            <a href="/">voltar</a>
+            <ButtonText onClick={handleBack} title="voltar" />
           </header>
         
           <Input 
@@ -91,7 +99,7 @@ async function handleNewNote() {
             {
               links.map((link, index) => (
                 <NoteItem
-                  index={String(index)}
+                  key={String(index)}
                   value={link}
                   onClick={() => handleRemoveLink(link)}
                 />
@@ -114,7 +122,7 @@ async function handleNewNote() {
                 tags.map((tag, index) => (
                   <NoteItem 
                     value={tag}
-                    index={String(index)}
+                    key={String(index)}
                     onClick={() =>  handleRemoveTag(tag)}     
                   />
                 ))

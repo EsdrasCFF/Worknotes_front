@@ -26,7 +26,6 @@ export function SignUp() {
       .then(() => {
         alert("Successfully registered user!")
         redirect("/")
-
       })
       .catch(error => {
         if(error.response) {
