@@ -43,13 +43,14 @@ function AuthProvider({children}) {
         fileUploadForm.append("avatar", avatarFile);
 
         const response = await api.patch("/users/avatar", fileUploadForm);
-        user.avatar = response.data.avatar
+        user.avatar = response.data.avatar;
       }
       
       await api.put("/users", user);
-      
 
-      localStorage.setItem("@worknotes:user", JSON.stringify(user));
+      const {old_password, password, ...userProps } = user;
+
+      localStorage.setItem("@worknotes:user", JSON.stringify(userProps));
 
       setData({
         user,
