@@ -69,7 +69,12 @@ export const NewNote  = styled.button`
   justify-content: center;
   
   > a {
+<<<<<<< HEAD
     color: ${({theme}) => theme.COLORS.BACKGROUND_900}
+=======
+    text-decoration: none;
+    color: ${({theme}) => theme.COLORS.BACKGROUND_900};
+>>>>>>> 9bdaa7bac6147b9677410dcc0fdd6d36175e3580
   }
 
   > svg {

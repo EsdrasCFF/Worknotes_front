@@ -18,7 +18,10 @@ export const Container = styled.div`
       font-size: 24px;
       color: ${({ theme }) => theme.COLORS.GRAY_100};
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9bdaa7bac6147b9677410dcc0fdd6d36175e3580
     button {
       background: none;
       border: none;
