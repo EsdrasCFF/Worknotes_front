@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 
 import { useState } from 'react';
 
-import { useAuth } from '../../hooks/auth';
-
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 
 import { Background, Container, Form } from "./styles";
 
+import { useAuth } from '../../hooks/auth';
+
 export function SignIn() {
+<<<<<<< HEAD
   const  { signIn, user }  = useAuth();
   
 
@@ -20,6 +21,12 @@ export function SignIn() {
   async function handleSignIn() {
     await signIn({email, password})
     console.log(user)
+=======
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { signIn } = useAuth();
+>>>>>>> 9bdaa7bac6147b9677410dcc0fdd6d36175e3580
 
   }
 
